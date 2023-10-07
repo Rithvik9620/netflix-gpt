@@ -1,8 +1,63 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
+import validateData from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [isSignedIn, setIsSignedIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const email = useRef(null);
+  const password = useRef(null);
+
+  function validateForm() {
+    const message = validateData(email.current.value, password.current.value);
+    setErrorMessage(message);
+    if (message) return;
+
+    if (!isSignedIn) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          navigate("/browse");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+          // ..
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          navigate("/browse");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    }
+  }
 
   function handleToggleSign() {
     setIsSignedIn(!isSignedIn);
@@ -27,17 +82,21 @@ const Login = () => {
           />
         )}
         <input
+          ref={email}
           type="text"
           placeholder="Email or phone number"
           className="p-4 my-2 rounded-md w-full bg-gray-800"
         />
         <input
+          ref={password}
           type="password"
           placeholder="Password"
-          className="p-4 my-2 rounded-md w-full bg-gray-800"
+          className="p-4 my-2 rounded-md w-full  bg-gray-800"
         />
+        <p className="font-bold text-red-700 py-2">{errorMessage}</p>
         <button
           type="button"
+          onClick={validateForm}
           className="w-full bg-red-700 mt-8 text-lg p-2 rounded-md"
         >
           {isSignedIn ? "Sign In" : "Sign Up"}

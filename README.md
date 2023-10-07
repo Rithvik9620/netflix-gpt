@@ -3,8 +3,16 @@
 - Create React App
 - Configure Tailwind CSS using tutorial
 - Header
+- Routing of App
 - Login Form
 - Signup Form
+- Form Validation
+- useRef Hook
+- Firebase Setup
+- Deploying the app
+- Create SignUp user account
+- Implement Sign in user api
+- Created redux store with Userslice
 
 # Features
 
@@ -13,11 +21,11 @@
   - Login or sign up form
   - Redirect to Browse
 
-- Browse (Logged IN)
+- Browse (Logged In)
 
   - Header
   - Main Movie
-    - Trailer in backgorund
+    - Trailer in background
     - Title and buttons
   - Movie Suggestions
     - Movie List \* N
