@@ -4,6 +4,7 @@ import validateData from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +14,7 @@ const Login = () => {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
@@ -30,7 +32,20 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          navigate("/browse");
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
+          })
+            .then(() => {
+              // Profile updated!
+              // ...
+              navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+              setErrorMessage(error.message);
+            });
           // ...
         })
         .catch((error) => {
@@ -76,6 +91,7 @@ const Login = () => {
         <h1 className="text-3xl mb-4">{isSignedIn ? "Sign In" : "Sign Up"}</h1>
         {!isSignedIn && (
           <input
+            ref={name}
             type="text"
             placeholder="Full name"
             className="p-4 my-2 rounded-md w-full bg-gray-800"
