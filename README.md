@@ -14,6 +14,17 @@
 - Implement Sign in user api
 - Created redux store with Userslice
 - Successful logout
+- Login/Logout bug fix
+- Unsubscribed the OnAuthStateChanged
+- Added hardcoded values to the constants file
+- Register in TMDB app and get the token
+- Custom hook for now playing movies
+- Create movieSlice
+- Update store with movies data
+- Planning for main container & secondary container
+- Fetch trailer data
+- Update store with trailer data
+- Embedded the youtube video and autoplay
 
 # Features
 
