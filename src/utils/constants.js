@@ -14,3 +14,27 @@ export const API_OPTIONS = {
 };
 
 export const IMG_CDN = "https://image.tmdb.org/t/p/w500";
+
+export const BG_URL =
+  "https://assets.nflxext.com/ffe/siteui/vlv3/893a42ad-6a39-43c2-bbc1-a951ec64ed6d/1d86e0ac-428c-4dfa-9810-5251dbf446f8/IN-en-20231002-popsignuptwoweeks-perspective_alpha_website_large.jpg";
+
+export const SUPPORTED_LANGUAGES = [
+  { identifier: "English", lang: "English" },
+  { identifier: "Hindi", lang: "Hindi" },
+  { identifier: "French", lang: "French" },
+];
+
+export const translations = {
+  English: {
+    placeholder: "What would you like to watch today?",
+    search: "Search",
+  },
+  Hindi: {
+    placeholder: "आज आप क्या देखना चाहेंगे?",
+    search: "खोज",
+  },
+  French: {
+    placeholder: "Qu’aimeriez-vous regarder aujourd’hui ?",
+    search: "Recherche",
+  },
+};

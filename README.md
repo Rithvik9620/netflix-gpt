@@ -25,6 +25,12 @@
 - Fetch trailer data
 - Update store with trailer data
 - Embedded the youtube video and autoplay
+- Secondary Container CSS
+- Different Movie List using api
+- GPT Search Bar
+- Added Icons using react-icons
+- Multi-Language Feature
+- Solved a bug with multi-language feature
 
 # Features
 
